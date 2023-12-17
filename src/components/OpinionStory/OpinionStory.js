@@ -1,9 +1,10 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
+import { QUERIES } from "../../constants";
 
 const OpinionStory = ({ id, title, author, avatar }) => {
   return (
-    <a href={`/story/${id}`}>
+    <LinkWrapper href={`/story/${id}`}>
       <Wrapper>
         <Avatar alt="" src={avatar} />
         <div>
@@ -11,12 +12,23 @@ const OpinionStory = ({ id, title, author, avatar }) => {
           <ArticleTitle>{title}</ArticleTitle>
         </div>
       </Wrapper>
-    </a>
+    </LinkWrapper>
   );
 };
+const LinkWrapper = styled.a`
+  padding: 16px 0;
+  background-color: var(--color-gray-100);
+  &:last-of-type {
+    padding-bottom: 0;
+  }
+`;
 
 const Wrapper = styled.article`
   color: var(--color-gray-900);
+  @media ${QUERIES.tabletOnly} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const Avatar = styled.img`
@@ -25,6 +37,12 @@ const Avatar = styled.img`
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
+  float: right;
+  margin-left: 16px;
+  @media ${QUERIES.tabletOnly} {
+    float: revert;
+    margin-left: revert;
+  }
 `;
 
 const AuthorName = styled.p`
